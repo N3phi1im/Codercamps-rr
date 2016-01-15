@@ -1,13 +1,13 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
     "start": "nodemon ./bin/www"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^1.5.2",
     "body-parser": "^1.14.2",
     "cookie-parser": "^1.4.1",
     "ejs": "^2.3.4",
@@ -15,5 +15,21 @@
     "mongoose": "^4.3.5",
     "morgan": "^1.6.1",
     "serve-favicon": "^2.3.0"
-  }
+  },
+  "main": "server.js",
+  "devDependencies": {
+    "istanbul": "^0.4.2",
+    "mocha": "^2.3.4",
+    "should": "^8.1.1",
+    "supertest": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N3phi1im/Codercamps-rr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/N3phi1im/Codercamps-rr/issues"
+  },
+  "homepage": "https://github.com/N3phi1im/Codercamps-rr#readme",
+  "description": ""
 }

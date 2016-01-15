@@ -4,7 +4,17 @@ namespace app.Controllers {
 
     public books;
 
-    constructor(private HomeService: app.Services.HomeService) {
+    public delete(id) {
+        this.HomeService.deleteBook(id).then((res) => {
+            this.$location.path("/");
+        });
+    }
+
+    constructor(private HomeService: app.Services.HomeService,
+                private $location: ng.ILocationService,
+                private $routeParams: ng.route.IRouteParamsService
+
+    ) {
       this.books = HomeService.getAll();
     }
   }

@@ -13,6 +13,11 @@ var App;
             controller: app.Controllers.BooksCreateController,
             controllerAs: 'vm'
         })
+            .when('/update/:id', {
+            templateUrl: '/templates/bookUpdate.html',
+            controller: app.Controllers.BookUpdateController,
+            controllerAs: 'vm'
+        })
             .otherwise({ redirectTo: '/' });
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('HTTPFactory');

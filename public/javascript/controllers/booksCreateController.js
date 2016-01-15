@@ -16,7 +16,7 @@ var app;
                 });
             };
             return BooksCreateController;
-        }());
+        })();
         Controllers.BooksCreateController = BooksCreateController;
         angular.module('app').controller('BooksCreateController', BooksCreateController);
     })(Controllers = app.Controllers || (app.Controllers = {}));

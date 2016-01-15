@@ -1,4 +1,4 @@
-"use strict";
+git"use strict";
 import express = require('express');
 import favicon = require('serve-favicon');
 import logger = require('morgan');

@@ -3,4 +3,6 @@
     <h3>Author: {{b.author}}</h3>
     <h3>Publish: {{b.publish}}</h3>
     <h3>Genre: {{b.genre}}</h3>
+    <a ng-href="/update/{{b._id}}">Update</a>
+    <button ng-click="vm.delete(b._id)">Delete</button>
 </div>
