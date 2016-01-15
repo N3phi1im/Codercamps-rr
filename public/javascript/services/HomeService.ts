@@ -12,7 +12,7 @@ namespace app.Services {
         return this.BookResource.save(book).$promise;
     };
 
-    constructor(private $resource: ng.Resource.IResourceService) {
+    constructor(private $resource: ng.resource.IResourceService) {
       this.BookResource = $resource("/books");
     }
   }
