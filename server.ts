@@ -1,4 +1,4 @@
-git"use strict";
+"use strict";
 import express = require('express');
 import favicon = require('serve-favicon');
 import logger = require('morgan');
@@ -10,6 +10,8 @@ const app = express();
 ///////////////////////////////
 import mongoose = require('mongoose');
 require("./models/books");
+require('./models/users');
+require('./config/passport');
 mongoose.connect("mongodb://localhost/bookStore");
 
 //continue this....
@@ -27,7 +29,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 let bookRoutes = require("./routes/booksRoutes");
+let userRoutes = require('./routes/userRoutes');
 app.use("/books", bookRoutes);
+app.use('/users', userRoutes);
 
 app.use(express.static('./public'));
 app.use('/scripts', express.static('bower_components'));

@@ -1,6 +1,4 @@
 "use strict";
-git;
-"use strict";
 var express = require('express');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -8,6 +6,8 @@ var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
 require("./models/books");
+require('./models/users');
+require('./config/passport');
 mongoose.connect("mongodb://localhost/bookStore");
 app.set('views', './views');
 app.engine('html', require('ejs').renderFile);
@@ -17,7 +17,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 var bookRoutes = require("./routes/booksRoutes");
+var userRoutes = require('./routes/userRoutes');
 app.use("/books", bookRoutes);
+app.use('/users', userRoutes);
 app.use(express.static('./public'));
 app.use('/scripts', express.static('bower_components'));
 app.get('/*', function (req, res, next) {

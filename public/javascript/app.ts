@@ -24,6 +24,16 @@ namespace App {
       controller: app.Controllers.BookUpdateController,
       controllerAs: 'vm'
     })
+      .when('/login', {
+      templateUrl: '/templates/Login.html',
+      controller: app.Controllers.UserController,
+      controllerAs: 'vm'
+    })
+      .when('/register', {
+      templateUrl: '/templates/Register.html',
+      controller: app.Controllers.UserController,
+      controllerAs: 'vm'
+    })
       .otherwise({ redirectTo: '/' });
 
 

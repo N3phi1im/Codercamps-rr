@@ -8,10 +8,13 @@
   <link rel="stylesheet" href="/css/site.css" charset="utf-8" />
 </head>
 
-<body>
+<body ng-controller='GlobalController as gc'>
   <div>
     <a href="/">Home</a>
     <a href="/booksCreate">Create New Book</a>
+    <button ng-href="/login">Login</button>
+    <button ng-href="/register">Register</button>
+    <button ng-click="gc.logout()">Logout</button>
   </div>
 
   <ng-view></ng-view>
@@ -22,6 +25,7 @@
 
   <script src="/javascript/app.js"></script>
   <script src="/javascript/services/HomeService.js"></script>
+  <script src="/javascript/services/UserService.js"></script>
   <script src="/javascript/services/HTTPFactory.js"></script>
   <script src="/javascript/controllers/HomeController.js"></script>
   <script src="/javascript/controllers/booksCreateController.js"></script>
