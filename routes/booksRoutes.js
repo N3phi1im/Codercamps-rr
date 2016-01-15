@@ -35,7 +35,7 @@ router.delete("/", function (req, res, next) {
     });
 });
 router.put("/:_id", function (req, res, next) {
-    Book.findOneAndUpdate({ _id: req.params._id }, req.body, function (err, result) {
+    Book.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function (err, result) {
         if (err)
             return next(err);
         if (!result)

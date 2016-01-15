@@ -12,7 +12,8 @@ mongoose.connect("mongodb://localhost/bookStore");
 app.set('views', './views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.use(logger('dev'));
+if (process.env.NODE_ENV !== 'test')
+    app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

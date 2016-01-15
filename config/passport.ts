@@ -12,7 +12,7 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
-  User.findOne({username: username}, function(err, user) {
+  User.findOne({username: username}, function(err, user: any) {
     if(err) return done(err);
     if(!user) return done(null, false, { message: 'Incorrect username.'});
     if(!user.validatePassword(password)) return done(null, false, { message: 'Password does not match.'});

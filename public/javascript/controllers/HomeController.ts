@@ -6,7 +6,7 @@ namespace app.Controllers {
 
     public delete(id) {
         this.HomeService.deleteBook(id).then((res) => {
-            this.$location.path("/");
+          this.books = this.books.filter((b) => b._id !== id);
         });
     }
 

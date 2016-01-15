@@ -18,7 +18,7 @@ var app;
                 return this.UserLoginResource.save(user).$promise;
             };
             return UserService;
-        }());
+        })();
         Services.UserService = UserService;
         angular.module('app').service('UserService', UserService);
     })(Services = app.Services || (app.Services = {}));

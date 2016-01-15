@@ -1,14 +1,16 @@
 'use strict';
 namespace app.Controllers {
   export class UserController {
+    public user;
+
     public login(user) {
-      this.UserService.login(user).then((res) => {
+      this.UserService.login(this.user).then((res) => {
         this.$location.path('/');
       })
     }
 
     public register(user) {
-      this.UserService.register(user).then((res) => {
+      this.UserService.register(this.user).then((res) => {
         this.$location.path('/');
       });
     };

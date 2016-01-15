@@ -28,7 +28,7 @@ var app;
             };
             ;
             return HomeService;
-        }());
+        })();
         Services.HomeService = HomeService;
         angular.module('app').service('HomeService', HomeService);
     })(Services = app.Services || (app.Services = {}));

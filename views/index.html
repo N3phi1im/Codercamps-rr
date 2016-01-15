@@ -12,8 +12,8 @@
   <div>
     <a href="/">Home</a>
     <a href="/booksCreate">Create New Book</a>
-    <button ng-href="/login">Login</button>
-    <button ng-href="/register">Register</button>
+    <a ng-href="/login">Login</a>
+    <a ng-href="/register">Register</a>
     <button ng-click="gc.logout()">Logout</button>
   </div>
 
@@ -28,6 +28,8 @@
   <script src="/javascript/services/UserService.js"></script>
   <script src="/javascript/services/HTTPFactory.js"></script>
   <script src="/javascript/controllers/HomeController.js"></script>
+  <script src="/javascript/controllers/UserController.js"></script>
+  <script src="/javascript/controllers/GlobalController.js"></script>
   <script src="/javascript/controllers/booksCreateController.js"></script>
   <script src="/javascript/controllers/bookUpdateController.js"></script>
 </body>

@@ -43,7 +43,7 @@ router.delete("/", (req, res, next) => {
 // PUT: /books/:_id
 router.put("/:_id", (req, res, next) => {
   // ( findBy, updateWith, callback )
-  Book.findOneAndUpdate({ _id: req.params._id }, req.body, (err, result) => {
+  Book.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, (err, result) => {
     if (err) return next(err);
     if (!result) return next({ message: 'Could not find and update the book.' });
     res.send(result);

@@ -13,11 +13,11 @@ var app;
             HomeController.prototype.delete = function (id) {
                 var _this = this;
                 this.HomeService.deleteBook(id).then(function (res) {
-                    _this.$location.path("/");
+                    _this.books = _this.books.filter(function (b) { return b._id !== id; });
                 });
             };
             return HomeController;
-        }());
+        })();
         Controllers.HomeController = HomeController;
         angular.module('app').controller('HomeController', HomeController);
     })(Controllers = app.Controllers || (app.Controllers = {}));

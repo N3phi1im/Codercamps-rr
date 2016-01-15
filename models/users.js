@@ -10,10 +10,10 @@ var UserSchema = new mongoose.Schema({
 });
 UserSchema.method('setPassword', function (password) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.passwordHash = crypto.pbkdf2sync(password, this.salt, 1000, 64).toString('hex');
+    this.passwordHash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 });
 UserSchema.method('validatePassword', function (password) {
-    var hash = crypto.pbkdf2sync(password, this.salt, 1000, 64).toString('hex');
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 });
 UserSchema.method('generateJWT', function () {
     return jwt.sign({
