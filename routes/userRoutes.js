@@ -1,7 +1,8 @@
 "use strict";
 var express = require('express');
 var passport = require('passport');
-var User = require('../models/users');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 var router = express.Router();
 router.post('/register', function (req, res, next) {
     var user = new User();

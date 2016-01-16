@@ -3,14 +3,21 @@ namespace app.Controllers {
   export class UserController {
     public user;
 
-    public login(user) {
+    public login() {
       this.UserService.login(this.user).then((res) => {
+        this.UserService.setToken(res.token);
+        this.UserService.setUser();
         this.$location.path('/');
       })
     }
 
-    public register(user) {
-      this.UserService.register(this.user).then((res) => {
+    public register() {
+      let user = {
+        username: this.user.username,
+        email: this.user.email,
+        password: this.user.password
+      }
+      this.UserService.register(user).then((res) => {
         this.$location.path('/');
       });
     };

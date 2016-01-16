@@ -14,10 +14,11 @@ UserSchema.method('setPassword', function (password) {
 });
 UserSchema.method('validatePassword', function (password) {
     var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    return (hash === this.passwordHash);
 });
 UserSchema.method('generateJWT', function () {
     return jwt.sign({
-        id: this._id,
+        _id: this._id,
         username: this.username,
         email: this.email
     }, 'SecretKey');

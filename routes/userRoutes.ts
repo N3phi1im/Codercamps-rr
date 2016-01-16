@@ -1,9 +1,8 @@
 import express = require('express');
-import mongoose = require('mongoose');
 import passport = require('passport');
 import jwt = require('jsonwebtoken');
-
-let User = require('../models/users');
+let mongoose = require('mongoose');
+let User = mongoose.model('User')
 let router = express.Router();
 
 router.post('/register', function(req, res, next) {

@@ -4,6 +4,7 @@ import favicon = require('serve-favicon');
 import logger = require('morgan');
 import cookieParser = require('cookie-parser');
 import bodyParser = require('body-parser');
+import passport = require('passport');
 
 const app = express();
 ////////////////////////////////
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV !== 'test') app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
 
 let bookRoutes = require("./routes/booksRoutes");
 let userRoutes = require('./routes/userRoutes');

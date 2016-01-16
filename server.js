@@ -3,6 +3,7 @@ var express = require('express');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 var app = express();
 var mongoose = require('mongoose');
 require("./models/books");
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV !== 'test')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
 var bookRoutes = require("./routes/booksRoutes");
 var userRoutes = require('./routes/userRoutes');
 app.use("/books", bookRoutes);
