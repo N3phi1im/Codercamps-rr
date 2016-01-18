@@ -24,6 +24,7 @@
     "files": [
         "config/passport.ts",
         "models/books.ts",
+        "models/comments.ts",
         "models/users.ts",
         "public/javascript/app.ts",
         "public/javascript/controllers/bookDetailsController.ts",

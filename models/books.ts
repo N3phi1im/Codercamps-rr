@@ -7,7 +7,8 @@ let BookSchema = new mongoose.Schema({
   author: { type: String, required: true },
   publish: { type: Number, min: 0, required: true },
   genre: { type: String, required: true },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
   // createdBy: {
   //   username: String,
   //   email: String,

@@ -8,6 +8,7 @@ var app = express();
 var mongoose = require('mongoose');
 require('./models/users');
 require("./models/books");
+require('./models/comments');
 require('./config/passport');
 mongoose.connect("mongodb://localhost/bookStore");
 app.set('views', './views');
