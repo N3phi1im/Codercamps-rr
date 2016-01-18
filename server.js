@@ -10,7 +10,10 @@ require('./models/users');
 require("./models/books");
 require('./models/comments');
 require('./config/passport');
-mongoose.connect("mongodb://localhost/bookStore");
+if (process.env.NODE_ENV === 'test')
+    mongoose.connect("mongodb://localhost/bookStore-test");
+else
+    mongoose.connect("mongodb://localhost/bookStore");
 app.set('views', './views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');

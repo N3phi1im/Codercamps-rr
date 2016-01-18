@@ -14,9 +14,12 @@ require('./models/users');
 require("./models/books");
 require('./models/comments');
 require('./config/passport');
-mongoose.connect("mongodb://localhost/bookStore");
 
-//continue this....
+if (process.env.NODE_ENV === 'test')
+  mongoose.connect("mongodb://localhost/bookStore-test");
+else
+  mongoose.connect("mongodb://localhost/bookStore");
+
 
 // view engine setup
 app.set('views', './views');

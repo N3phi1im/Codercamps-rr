@@ -30,6 +30,7 @@ router.get('/:id', function (req, res, next) {
 });
 router.post("/", auth, function (req, res, next) {
     var newBook = new Book(req.body);
+    console.log(req['payload']);
     newBook.createdBy = req['payload']._id;
     newBook.save(function (err, book) {
         if (err)

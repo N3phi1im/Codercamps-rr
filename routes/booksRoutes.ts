@@ -37,6 +37,7 @@ router.get('/:id', (req, res, next) => {
 // POST: /books
 router.post("/", auth, (req, res, next) => {
   let newBook = new Book(req.body);
+  console.log(req['payload']);
   newBook.createdBy = req['payload']._id;
   newBook.save((err, book) => {
     if (err) return next(err);
