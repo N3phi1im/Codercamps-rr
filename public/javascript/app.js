@@ -8,6 +8,11 @@ var App;
             controller: app.Controllers.HomeController,
             controllerAs: 'vm'
         })
+            .when('/details/:id', {
+            templateUrl: '/templates/bookDetails.html',
+            controller: app.Controllers.BookDetailsController,
+            controllerAs: 'vm'
+        })
             .when('/booksCreate', {
             templateUrl: '/templates/booksCreate.html',
             controller: app.Controllers.BooksCreateController,

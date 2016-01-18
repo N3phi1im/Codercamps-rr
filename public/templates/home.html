@@ -1,5 +1,5 @@
 <div ng-repeat="b in vm.books">
-    <h1>Title: {{b.title}}</h1>
+    <h1><a ng-href="/details/{{b._id}}">{{b.title}}</a></h1>
     <h3>Author: {{b.author}}</h3>
     <h3>Publish: {{b.publish}}</h3>
     <h3>Genre: {{b.genre}}</h3>

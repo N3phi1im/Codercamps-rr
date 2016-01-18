@@ -26,10 +26,11 @@ router.get("/", (req, res, next) => {
 // GET: /books/:id
 router.get('/:id', (req, res, next) => {
   Book.findOne({ _id: req.params.id })
+    .populate('createdBy', 'username email')
     .exec((err, book) => {
-      if (err) return next(err);
-      if (!book) return next({ message: 'Could not find your book.' });
-      res.send(book);
+    if (err) return next(err);
+    if (!book) return next({ message: 'Could not find your book.' });
+    res.send(book);
   });
 });
 
@@ -39,8 +40,8 @@ router.post("/", auth, (req, res, next) => {
   newBook.createdBy = req['payload']._id;
   newBook.save((err, book) => {
     if (err) return next(err);
-    User.update({ _id: req['payload']._id }, { $push: { 'books': book._id }}, (err, result) => {
-      if(err) return next(err);
+    User.update({ _id: req['payload']._id }, { $push: { 'books': book._id } }, (err, result) => {
+      if (err) return next(err);
       res.send(book);
     });
   });

@@ -19,6 +19,7 @@ router.get("/", function (req, res, next) {
 });
 router.get('/:id', function (req, res, next) {
     Book.findOne({ _id: req.params.id })
+        .populate('createdBy', 'username email')
         .exec(function (err, book) {
         if (err)
             return next(err);

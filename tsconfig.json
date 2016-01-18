@@ -26,6 +26,7 @@
         "models/books.ts",
         "models/users.ts",
         "public/javascript/app.ts",
+        "public/javascript/controllers/bookDetailsController.ts",
         "public/javascript/controllers/booksCreateController.ts",
         "public/javascript/controllers/bookUpdateController.ts",
         "public/javascript/controllers/GlobalController.ts",

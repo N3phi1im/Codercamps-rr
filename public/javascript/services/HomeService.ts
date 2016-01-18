@@ -7,11 +7,6 @@ namespace app.Services {
     public getAll() {
       // GET: /books
       return this.BookResource.query();
-    };
-
-    public deleteBook(bookId) {
-      // DELETE: /books?_id={{id}}
-      return this.BookResource.delete({ _id: bookId }).$promise;
     }
 
     public getBook(bookId) {
@@ -19,15 +14,20 @@ namespace app.Services {
       return this.BookResource.get({ id: bookId });
     }
 
+    public saveBook(book) {
+      // POST: /books
+      return this.BookResource.save(book).$promise;
+    };
+
     public updateBook(book) {
       // PUT: /books/{{book._id}}
       return this.BookResource.update({ id: book._id }, book).$promise;
     }
 
-    public saveBook(book) {
-      // POST: /books
-      return this.BookResource.save(book).$promise;
-    };
+    public deleteBook(bookId) {
+      // DELETE: /books?_id={{id}}
+      return this.BookResource.delete({ _id: bookId }).$promise;
+    }
 
     constructor(private $resource: ng.resource.IResourceService) {
 
