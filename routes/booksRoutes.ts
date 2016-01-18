@@ -27,6 +27,7 @@ router.get("/", (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Book.findOne({ _id: req.params.id })
     .populate('createdBy', 'username email')
+    .populate('comments')
     .exec((err, book) => {
     if (err) return next(err);
     if (!book) return next({ message: 'Could not find your book.' });

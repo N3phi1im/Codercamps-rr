@@ -25,8 +25,10 @@ app.use(cookieParser());
 app.use(passport.initialize());
 var bookRoutes = require("./routes/booksRoutes");
 var userRoutes = require('./routes/userRoutes');
+var commentRoutes = require('./routes/commentRoutes');
 app.use("/books", bookRoutes);
 app.use('/users', userRoutes);
+app.use('/api/comments', commentRoutes);
 app.use(express.static('./public'));
 app.use('/scripts', express.static('bower_components'));
 app.get('/*', function (req, res, next) {

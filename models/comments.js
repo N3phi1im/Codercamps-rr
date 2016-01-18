@@ -5,6 +5,8 @@ var CommentSchema = new mongoose.Schema({
     created: { type: Number, default: Date.now },
     deleted: { type: Number, default: null },
     book: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', required: true },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    createdByEmail: String,
+    createdByUsername: String
 });
 exports.Comment = mongoose.model('Comment', CommentSchema);

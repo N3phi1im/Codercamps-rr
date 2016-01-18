@@ -36,8 +36,10 @@ app.use(passport.initialize());
 
 let bookRoutes = require("./routes/booksRoutes");
 let userRoutes = require('./routes/userRoutes');
+let commentRoutes = require('./routes/commentRoutes');
 app.use("/books", bookRoutes);
 app.use('/users', userRoutes);
+app.use('/api/comments', commentRoutes);
 
 app.use(express.static('./public'));
 app.use('/scripts', express.static('bower_components'));
