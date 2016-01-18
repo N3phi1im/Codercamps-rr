@@ -47,13 +47,6 @@ router.post("/", auth, (req, res, next) => {
   });
 });
 
-// DELETE: /books?_id={{book_id}}
-router.delete("/", (req, res, next) => {
-  Book.remove({ _id: req.query._id }, (err, result) => {
-    res.send({ message: "SUCCESSSS!YAAAY" });
-  });
-});
-
 // PUT: /books/:_id
 router.put("/:_id", (req, res, next) => {
   // ( findBy, updateWith, callback )
@@ -61,6 +54,14 @@ router.put("/:_id", (req, res, next) => {
     if (err) return next(err);
     if (!result) return next({ message: 'Could not find and update the book.' });
     res.send(result);
+  });
+});
+
+// DELETE: /books?_id={{book_id}}
+router.delete("/", (req, res, next) => {
+  if (!req.query._id) return next({ status: 404, message: 'Please include an ID '});
+  Book.remove({ _id: req.query._id }, (err, result) => {
+    res.send({ message: "SUCCESSSS!YAAAY" });
   });
 });
 

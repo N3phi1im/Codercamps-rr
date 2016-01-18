@@ -5,18 +5,30 @@ let request = require('supertest');
 
 let app = require('../server');
 let Book = mongoose.model('Book');
+let User = mongoose.model('User');
 
 describe('-- Book Routes --', () => {
   let id;
+  let authHeader;
   before((done) => {
-    let book = new Book();
-    book.title = "Sample Title";
-    book.author = "Sample Author";
-    book.publish = 111;
-    book.genre = 'Sample Genre';
-    book.save((err) => {
-      id = book._id.toString();
-      done();
+    let u = new User();
+    u.username = "bookUser";
+    u.email = 'book@user.com';
+    u.setPassword('secret');
+    u.save((err, user) => {
+      let book = new Book();
+      book.title = "Sample Title";
+      book.author = "Sample Author";
+      book.publish = 111;
+      book.genre = 'Sample Genre';
+      book.createdBy = user._id;
+      book.save((err) => {
+        authHeader = `Bearer ${user.generateJWT()}`;
+        id = book._id.toString();
+        user.books.push(book._id);
+        user.save();
+        done();
+      });
     });
   });
 
@@ -41,9 +53,23 @@ describe('-- Book Routes --', () => {
   });
   // end of GET /books
   describe('POST /books', () => {
-    it('Should return a 400 with no body', (done) => {
+    it('Should return a 401 without an auth header', (done) => {
+      var b = {
+        title: 'title',
+        author: 'author',
+        publish: 123,
+        genre: 'genre'
+      };
       request(app)
         .post('/books')
+        .send(b)
+        .expect(401)
+        .end(done);
+    });
+    it('Should return a 500 with no body', (done) => {
+      request(app)
+        .post('/books')
+        .set('Authorization', authHeader)
         .expect(500)
         .end(done);
     });
@@ -56,6 +82,7 @@ describe('-- Book Routes --', () => {
       };
       request(app)
         .post('/books')
+        .set('Authorization', authHeader)
         .send(b)
         .expect(200)
         .expect((res) => {
@@ -101,6 +128,21 @@ describe('-- Book Routes --', () => {
           res.body.title.should.equal('update title');
           res.body.author.should.equal('Sample Author');
         })
+        .end(done);
+    });
+  });
+  // end of PUT: /books?_id=
+  describe('DELETE /books?_id=', () => {
+    it('Should return a 404 if there is no id', (done) => {
+      request(app)
+        .delete('/books')
+        .expect(404)
+        .end(done);
+    });
+    it('Should return 200 if the id exists', (done) => {
+      request(app)
+        .delete('/books?_id=' + id)
+        .expect(200)
         .end(done);
     });
   });

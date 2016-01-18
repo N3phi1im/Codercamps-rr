@@ -41,11 +41,6 @@ router.post("/", auth, function (req, res, next) {
         });
     });
 });
-router.delete("/", function (req, res, next) {
-    Book.remove({ _id: req.query._id }, function (err, result) {
-        res.send({ message: "SUCCESSSS!YAAAY" });
-    });
-});
 router.put("/:_id", function (req, res, next) {
     Book.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function (err, result) {
         if (err)
@@ -53,6 +48,13 @@ router.put("/:_id", function (req, res, next) {
         if (!result)
             return next({ message: 'Could not find and update the book.' });
         res.send(result);
+    });
+});
+router.delete("/", function (req, res, next) {
+    if (!req.query._id)
+        return next({ status: 404, message: 'Please include an ID ' });
+    Book.remove({ _id: req.query._id }, function (err, result) {
+        res.send({ message: "SUCCESSSS!YAAAY" });
     });
 });
 module.exports = router;

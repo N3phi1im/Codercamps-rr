@@ -4,6 +4,7 @@ let server = require('../server');
 let async = require('async');
 let mongoose = require('mongoose');
 let Book = mongoose.model('Book');
+let User = mongoose.model('User');
 
 // clear out the database before running the tests!!
 before((done) => {
@@ -13,7 +14,7 @@ before((done) => {
     },
     (cb) => {
       // other database remove like the example above...
-      cb();
+      User.collection.remove(cb);
     }
   ], done);
 });
