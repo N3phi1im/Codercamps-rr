@@ -1,8 +1,14 @@
 "use strict";
 var express = require("express");
+var jwt = require('express-jwt');
 var mongoose = require("mongoose");
 var router = express.Router();
 var Book = mongoose.model("Book");
+var User = mongoose.model('User');
+var auth = jwt({
+    userProperty: 'payload',
+    secret: 'SecretKey'
+});
 router.get("/", function (req, res, next) {
     Book.find({})
         .exec(function (err, books) {
@@ -21,12 +27,17 @@ router.get('/:id', function (req, res, next) {
         res.send(book);
     });
 });
-router.post("/", function (req, res, next) {
+router.post("/", auth, function (req, res, next) {
     var newBook = new Book(req.body);
+    newBook.createdBy = req['payload']._id;
     newBook.save(function (err, book) {
         if (err)
             return next(err);
-        res.send(book);
+        User.update({ _id: req['payload']._id }, { $push: { 'books': book._id } }, function (err, result) {
+            if (err)
+                return next(err);
+            res.send(book);
+        });
     });
 });
 router.delete("/", function (req, res, next) {

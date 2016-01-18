@@ -1,9 +1,18 @@
 "use strict";
 
 import express = require("express");
+import jwt = require('express-jwt');
 let mongoose = require("mongoose");
 let router = express.Router();
 let Book = mongoose.model("Book");
+let User = mongoose.model('User');
+let auth = jwt({
+  // where we find the JWT information
+  // use it as req.payload.propertyname
+  userProperty: 'payload',
+  // secret must match the one on the User model, in the genJWT()
+  secret: 'SecretKey'
+});
 
 // GET: /books
 router.get("/", (req, res, next) => {
@@ -25,11 +34,15 @@ router.get('/:id', (req, res, next) => {
 });
 
 // POST: /books
-router.post("/", (req, res, next) => {
+router.post("/", auth, (req, res, next) => {
   let newBook = new Book(req.body);
+  newBook.createdBy = req['payload']._id;
   newBook.save((err, book) => {
     if (err) return next(err);
-    res.send(book);
+    User.update({ _id: req['payload']._id }, { $push: { 'books': book._id }}, (err, result) => {
+      if(err) return next(err);
+      res.send(book);
+    });
   });
 });
 

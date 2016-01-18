@@ -6,7 +6,8 @@ let UserSchema = new mongoose.Schema({
   username: { type: String, unique: true, lowercase: true },
   email: { type: String, unique: true, lowercase: true },
   passwordHash: String,
-  salt: String
+  salt: String,
+  books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
 });
 
 UserSchema.method('setPassword', function(password) {
@@ -24,6 +25,7 @@ UserSchema.method('generateJWT', function() {
     _id: this._id,
     username: this.username,
     email: this.email
+    // secret must match the one in the route
   }, 'SecretKey');
 });
 

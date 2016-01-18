@@ -6,7 +6,8 @@ var UserSchema = new mongoose.Schema({
     username: { type: String, unique: true, lowercase: true },
     email: { type: String, unique: true, lowercase: true },
     passwordHash: String,
-    salt: String
+    salt: String,
+    books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
 });
 UserSchema.method('setPassword', function (password) {
     this.salt = crypto.randomBytes(16).toString('hex');
