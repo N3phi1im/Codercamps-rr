@@ -21,6 +21,12 @@ var app;
                     _this.book.comments.push(res);
                 });
             };
+            BookDetailsController.prototype.deleteComment = function (comment) {
+                var _this = this;
+                this.CommentService.deleteComment(comment).then(function (res) {
+                    _this.book.comments.splice(_this.book.comments.indexOf(comment), 1);
+                });
+            };
             return BookDetailsController;
         })();
         Controllers.BookDetailsController = BookDetailsController;

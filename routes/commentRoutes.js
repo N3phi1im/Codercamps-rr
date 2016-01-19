@@ -43,4 +43,11 @@ router.post('/', function (req, res, next) {
         });
     });
 });
+router.delete('/:id', auth, function (req, res, next) {
+    Comment.update({ _id: req.params.id }, { deleted: Date.now() }, function (err, result) {
+        if (err)
+            return next(err);
+        res.send({ message: 'Deleted the comment.' });
+    });
+});
 module.exports = router;

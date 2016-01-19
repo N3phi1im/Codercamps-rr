@@ -14,4 +14,5 @@
 <hr>
 <div ng-repeat="c in vm.book.comments">
   <p>{{c}}</p>
+  <button type="button" ng-click="vm.deleteComment(c)">Delete</button>
 </div>

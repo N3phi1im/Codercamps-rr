@@ -26,6 +26,7 @@ router.get('/:id', function (req, res, next) {
             return next(err);
         if (!book)
             return next({ message: 'Could not find your book.' });
+        book.comments = book.comments.filter(function (comment) { return (comment.deleted === null); });
         res.send(book);
     });
 });

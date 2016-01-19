@@ -52,4 +52,12 @@ router.post('/', (req, res, next) => {
   });
 });
 
+// DELETE: /api/comments/:id
+router.delete('/:id', auth, (req, res, next) => {
+  Comment.update({ _id: req.params.id }, { deleted: Date.now() }, (err, result) => {
+    if (err) return next(err);
+    res.send({ message: 'Deleted the comment.' });
+  });
+});
+
 export = router;

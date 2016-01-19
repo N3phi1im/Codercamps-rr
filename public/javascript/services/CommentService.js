@@ -11,6 +11,10 @@ var app;
             CommentService.prototype.saveComment = function (comment) {
                 return this.commentResource.save(comment).$promise;
             };
+            CommentService.prototype.deleteComment = function (comment) {
+                return this.commentResource.delete({ id: comment._id }).$promise;
+            };
+            ;
             return CommentService;
         })();
         Services.CommentService = CommentService;

@@ -7,6 +7,10 @@ namespace app.Services {
       return this.commentResource.save(comment).$promise;
     }
 
+    public deleteComment(comment) {
+      return this.commentResource.delete({ id: comment._id }).$promise;
+    };
+
     constructor(
       private $resource: ng.resource.IResourceService
     ) {

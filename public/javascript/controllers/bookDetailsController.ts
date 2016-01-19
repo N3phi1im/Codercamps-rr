@@ -14,6 +14,12 @@ namespace app.Controllers {
       });
     }
 
+    public deleteComment(comment) {
+      this.CommentService.deleteComment(comment).then((res) => {
+        this.book.comments.splice(this.book.comments.indexOf(comment), 1);
+      });
+    }
+
     constructor(
       private HomeService: app.Services.HomeService,
       private CommentService: app.Services.CommentService,
