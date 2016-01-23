@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 var router = express.Router();
 var Book = mongoose.model("Book");
 var User = mongoose.model('User');
+var Comment = mongoose.model('Comment');
 var auth = jwt({
     userProperty: 'payload',
     secret: 'SecretKey'
@@ -22,12 +23,14 @@ router.get('/:id', function (req, res, next) {
         .populate('createdBy', 'username email')
         .populate('comments')
         .exec(function (err, book) {
-        if (err)
-            return next(err);
-        if (!book)
-            return next({ message: 'Could not find your book.' });
-        book.comments = book.comments.filter(function (comment) { return (comment.deleted === null); });
-        res.send(book);
+        Comment.populate(book.comments, { path: 'createdBy', select: 'username email' }, function (err, out) {
+            if (err)
+                return next(err);
+            if (!book)
+                return next({ message: 'Could not find your book.' });
+            book.comments = book.comments.filter(function (comment) { return (comment.deleted === null); });
+            res.send(book);
+        });
     });
 });
 router.post("/", auth, function (req, res, next) {

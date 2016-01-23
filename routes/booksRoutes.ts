@@ -6,6 +6,7 @@ let mongoose = require("mongoose");
 let router = express.Router();
 let Book = mongoose.model("Book");
 let User = mongoose.model('User');
+let Comment = mongoose.model('Comment');
 let auth = jwt({
   // where we find the JWT information
   // use it as req.payload.propertyname
@@ -29,10 +30,12 @@ router.get('/:id', (req, res, next) => {
     .populate('createdBy', 'username email')
     .populate('comments')
     .exec((err, book) => {
-    if (err) return next(err);
-    if (!book) return next({ message: 'Could not find your book.' });
-    book.comments = book.comments.filter((comment) => (comment.deleted === null));
-    res.send(book);
+    Comment.populate(book.comments, {path: 'createdBy', select: 'username email'}, (err, out) => {
+      if (err) return next(err);
+      if (!book) return next({ message: 'Could not find your book.' });
+      book.comments = book.comments.filter((comment) => (comment.deleted === null));
+      res.send(book);
+    });
   });
 });
 
@@ -61,7 +64,7 @@ router.put("/:_id", (req, res, next) => {
 
 // DELETE: /books?_id={{book_id}}
 router.delete("/", (req, res, next) => {
-  if (!req.query._id) return next({ status: 404, message: 'Please include an ID '});
+  if (!req.query._id) return next({ status: 404, message: 'Please include an ID ' });
   Book.remove({ _id: req.query._id }, (err, result) => {
     res.send({ message: "SUCCESSSS!YAAAY" });
   });
